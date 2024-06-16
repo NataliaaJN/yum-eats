@@ -5,6 +5,7 @@ import Hero from './components/Hero/Hero';
 import { Recipe } from './types/recipe';
 
 import './App.css';
+import RecipeList from './components/Recipes/RecipeList';
 
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -21,17 +22,12 @@ function App() {
   }, []);
 
   return (
-    <section className="w-full">
+    <section className="flex w-full flex-col">
       <Header />
       <div className="bg-pale-orange flex min-h-screen w-full flex-col">
         <Hero />
       </div>
-      <section className="container">
-        {recipes &&
-          recipes.map((recipe) => {
-            return <div>{recipe.title}</div>;
-          })}
-      </section>
+      {recipes && <RecipeList recipes={recipes} />}
       <footer className="container bg-black">footer</footer>
     </section>
   );
