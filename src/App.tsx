@@ -13,6 +13,7 @@ import './App.css';
 import RecipeList from './components/Recipes/RecipeList';
 import SearchInput from './components/Form/SearchInput';
 import Button from './components/Button';
+import Search from './components/Search/Search';
 
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -49,15 +50,11 @@ function App() {
         if (searchBy === 'recipe') {
           data = await searchRecipes(value);
         } else if (searchBy === 'ingredients') {
-          // data = await getRecipesByIngredients(value.split(','));
           const ingredientsArray = value.split(',').map((item) => item.trim());
           console.log(value);
 
-          // data = await getRecipesByIngredients(['tomatoes']);
           data = await getRecipesByIngredients(ingredientsArray);
-          // console.log(data);
         }
-        // setRecipes(data);
         setRecipes(data || []);
       } catch (err) {
         console.error(err);
@@ -68,7 +65,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchRecipes();
+    // fetchRecipes();
   }, []);
 
   return (
@@ -84,40 +81,13 @@ function App() {
           <h3 className="text-3xl">
             Ready for a culinary adventure? Let's get cooking!
           </h3>
-          <div className="flex w-full flex-col gap-y-6">
-            <ul className="flex items-center justify-center gap-x-10">
-              <li>
-                <Button
-                  className="w-fit"
-                  variant="secondary"
-                  onClick={() => setSearchBy('recipe')}
-                >
-                  Search for a recipe
-                </Button>
-              </li>
-              <li>
-                <Button
-                  className="w-fit"
-                  variant="secondary"
-                  onClick={() => setSearchBy('ingredients')}
-                >
-                  Search by ingredients
-                </Button>
-              </li>
-            </ul>
-            {searchBy && (
-              <SearchInput
-                className="w-full md:w-1/2"
-                value={searchTerm}
-                onChange={handleSearch}
-                placeholder={
-                  searchBy === 'recipe'
-                    ? 'Search for a recipe (e.g., pasta, cake)'
-                    : 'Enter ingredients separated by commas (e.g., tomato, cheese)'
-                }
-              />
-            )}
-          </div>
+          <Search
+            searchTerm={searchTerm}
+            searchBy={searchBy}
+            setSearchBy={setSearchBy}
+            handleSearch={handleSearch}
+          />
+
           {loading && <p>Loading...</p>}
           {!loading && recipes && <RecipeList recipes={recipes} />}
           {!loading && recipes.length === 0 && searchTerm !== '' && (

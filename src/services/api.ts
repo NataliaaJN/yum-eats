@@ -1,11 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { Recipe } from '../types/recipe';
 
 const apiKey = 'b44d6f10ec444bf7bf2c01d4c367b2ff';
 // const apiKey = process.env.REACT_APP_API_KEY;
 const baseURL = 'https://api.spoonacular.com/recipes';
 
-const api = axios.create({
+// Axios instance with base configuration
+const api: AxiosInstance = axios.create({
   baseURL,
   params: {
     apiKey,
@@ -42,6 +43,23 @@ export const searchRecipes = async (query: string): Promise<Recipe[]> => {
   }
 };
 
+export const getRecipesByIngredients = async (
+  ingredients: string[],
+): Promise<Recipe[]> => {
+  try {
+    const response = await api.get('/findByIngredients', {
+      params: {
+        apiKey,
+        ingredients: ingredients.join(','),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error searching recipes:', error);
+    throw error;
+  }
+};
+
 // export const getRecipesByCategory = async (
 //   category: string,
 // ): Promise<Recipe[]> => {
@@ -58,22 +76,3 @@ export const searchRecipes = async (query: string): Promise<Recipe[]> => {
 //     throw error;
 //   }
 // };
-
-export const getRecipesByIngredients = async (
-  ingredients: string[],
-): Promise<Recipe[]> => {
-  try {
-    const response = await api.get('/findByIngredients', {
-      params: {
-        apiKey,
-        ingredients: ingredients.join(', '),
-        number: 10,
-      },
-    });
-    console.log('getRecipesByIngredients response:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error searching recipes:', error);
-    throw error;
-  }
-};
