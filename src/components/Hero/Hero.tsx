@@ -13,14 +13,13 @@ const Hero = () => {
         </h2>
         <p className="text-xl lg:text-2xl">
           Dive into a delightful world of flavors and fun! Discover new recipes,
-          experiment with ingredients, and create mouth-watering dishes. Ready
-          for a culinary adventure? Let's get cooking!
+          experiment with ingredients, and create mouth-watering dishes.
         </p>
         <Button className="w-full md:w-fit" onClick={action}>
           Explore Recipes
         </Button>
       </section>
-      <figure className="self-center">
+      <figure className="max-w-[70%] self-center">
         <img src={FoodDish} alt="Local Example" />
       </figure>
     </article>
