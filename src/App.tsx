@@ -16,8 +16,6 @@ import Search from './components/Search/Search';
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [ingredients, setIngredients] = useState<string[]>([]);
-  // const [category, setCategory] = useState<string | null>(null);
   const [searchBy, setSearchBy] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -64,8 +62,10 @@ function App() {
     } else {
       setLoading(true);
       try {
-        setIngredients(inputValue.split(',').map((item) => item.trim()));
-        const data = await getRecipesByIngredients(ingredients);
+        const ingredientsList = inputValue
+          .split(',')
+          .map((item) => item.trim());
+        const data = await getRecipesByIngredients(ingredientsList);
         setRecipes(data || []);
       } catch (err) {
         console.error(err);
