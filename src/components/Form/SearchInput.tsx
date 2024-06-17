@@ -1,21 +1,33 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
 
 interface SearchInputProps {
   className?: string;
   placeholder?: string;
   value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  handleSearchOnClick?: boolean;
+  onClickSearch?: (inputValue: string) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 const SearchInput = ({
   className,
-  placeholder,
+  placeholder = 'Search...',
   value,
+  handleSearchOnClick = false,
+  onClickSearch,
   onChange,
 }: SearchInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    if (onClickSearch && inputRef.current) {
+      onClickSearch(inputRef.current.value);
+    }
+  };
   return (
     <div
-      className={`${className} relative flex items-center self-center rounded-full border p-2 focus-within:shadow-sm focus-visible:border-none`}
+      className={`${className} relative flex items-center self-center overflow-hidden rounded-full border p-2 focus-within:shadow-sm focus-visible:border-none`}
     >
       <span className="absolute inset-y-0 left-0 flex items-center pl-4">
         <svg
@@ -31,12 +43,22 @@ const SearchInput = ({
         </svg>
       </span>
       <input
+        ref={inputRef}
         className="ml-10 w-full placeholder:ml-10 focus:outline-none"
         type="search"
         value={value}
         onChange={onChange}
-        placeholder={placeholder ?? 'Search...'}
+        placeholder={placeholder}
       />
+      {/* {handleSearchOnClick && onClickSearch && ( */}
+      {handleSearchOnClick && onClickSearch && (
+        <button
+          onClick={handleButtonClick}
+          className="absolute right-0 top-0 h-full rounded-full bg-cyan px-4 text-white"
+        >
+          Search
+        </button>
+      )}
     </div>
   );
 };

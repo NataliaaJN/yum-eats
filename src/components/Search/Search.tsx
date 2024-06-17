@@ -1,33 +1,31 @@
-import React from 'react';
+import { ChangeEventHandler } from 'react';
 import SearchButtons from './SearchModeButtons';
-import SearchInput from '../Form/SearchInput';
+import SearchBar from './SearchBar';
 
 interface SearchProps {
   searchTerm: string;
   searchBy: string | null;
   setSearchBy: (option: string) => void;
-  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onClickSearch?: (inputValue: string) => void;
 }
 
 const Search = ({
   searchTerm,
   searchBy,
   setSearchBy,
-  handleSearch,
+  onChange,
+  onClickSearch,
 }: SearchProps) => {
   return (
     <div className="flex w-full flex-col gap-y-6">
       <SearchButtons searchBy={searchBy} setSearchBy={setSearchBy} />
       {searchBy && (
-        <SearchInput
-          className="w-full md:w-1/2"
+        <SearchBar
+          searchBy={searchBy}
           value={searchTerm}
-          onChange={handleSearch}
-          placeholder={
-            searchBy === 'recipe'
-              ? 'Search for a recipe (e.g., pasta, cake)'
-              : 'Enter ingredients separated by commas (e.g., tomato, cheese)'
-          }
+          onChange={onChange}
+          onClickSearch={onClickSearch}
         />
       )}
     </div>

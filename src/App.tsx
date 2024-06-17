@@ -11,8 +11,6 @@ import { Recipe } from './types/recipe';
 
 import './App.css';
 import RecipeList from './components/Recipes/RecipeList';
-import SearchInput from './components/Form/SearchInput';
-import Button from './components/Button';
 import Search from './components/Search/Search';
 
 function App() {
@@ -35,7 +33,7 @@ function App() {
     }
   };
 
-  const handleSearch = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchOnChange = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     event.stopPropagation();
     const value = event.target.value.toLocaleLowerCase();
@@ -49,12 +47,25 @@ function App() {
         let data: Recipe[] = [];
         if (searchBy === 'recipe') {
           data = await searchRecipes(value);
-        } else if (searchBy === 'ingredients') {
-          const ingredientsArray = value.split(',').map((item) => item.trim());
-          console.log(value);
-
-          data = await getRecipesByIngredients(ingredientsArray);
+        } else {
+          return;
         }
+        setRecipes(data || []);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  const handleSearchOnClick = async (inputValue: string) => {
+    if (inputValue === '') {
+      fetchRecipes();
+    } else {
+      setLoading(true);
+      try {
+        setIngredients(inputValue.split(',').map((item) => item.trim()));
+        const data = await getRecipesByIngredients(ingredients);
         setRecipes(data || []);
       } catch (err) {
         console.error(err);
@@ -65,7 +76,7 @@ function App() {
   };
 
   useEffect(() => {
-    // fetchRecipes();
+    fetchRecipes();
   }, []);
 
   return (
@@ -85,7 +96,8 @@ function App() {
             searchTerm={searchTerm}
             searchBy={searchBy}
             setSearchBy={setSearchBy}
-            handleSearch={handleSearch}
+            onChange={handleSearchOnChange}
+            onClickSearch={handleSearchOnClick}
           />
 
           {loading && <p>Loading...</p>}
