@@ -8,7 +8,7 @@ interface RecipeListProps {
 
 const RecipeList = ({ recipes }: RecipeListProps) => {
   return (
-    <section className="container grid grid-cols-4 gap-5 self-center">
+    <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {recipes.map((recipe) => {
         return (
           <RecipeCard

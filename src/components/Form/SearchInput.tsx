@@ -1,14 +1,22 @@
 import { ChangeEventHandler } from 'react';
 
 interface SearchInputProps {
+  className?: string;
   placeholder?: string;
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-const SearchInput = ({ value, onChange }: SearchInputProps) => {
+const SearchInput = ({
+  className,
+  placeholder,
+  value,
+  onChange,
+}: SearchInputProps) => {
   return (
-    <div className="relative flex w-1/2 items-center self-center rounded-full border p-2 focus-within:shadow-sm focus-visible:border-none">
+    <div
+      className={`${className} relative flex items-center self-center rounded-full border p-2 focus-within:shadow-sm focus-visible:border-none`}
+    >
       <span className="absolute inset-y-0 left-0 flex items-center pl-4">
         <svg
           fill="none"
@@ -27,7 +35,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
         type="search"
         value={value}
         onChange={onChange}
-        placeholder="Search..."
+        placeholder={placeholder ?? 'Search...'}
       />
     </div>
   );
