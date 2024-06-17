@@ -1,7 +1,6 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import {
   getRecipes,
-  // getRecipesByCategory,
   searchRecipes,
   getRecipesByIngredients,
 } from './services/api';
@@ -18,6 +17,15 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchBy, setSearchBy] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [headerHeight, setHeaderHeight] = useState<number>(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const handleResize = () => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.clientHeight);
+    }
+  };
 
   const fetchRecipes = async () => {
     setLoading(true);
@@ -77,18 +85,27 @@ function App() {
 
   useEffect(() => {
     fetchRecipes();
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
     <section className="relative flex w-full flex-col overflow-hidden">
       <div className="absolute left-0 top-0 -z-10 h-screen w-2/3 bg-pale-orange"></div>
       {/* <div className="absolute -right-1/2 -top-24 h-[150vh] w-full rounded-[50%] bg-white bg-opacity-50 shadow-lg"></div> */}
-      <Header />
+      <Header ref={headerRef} />
       <main className="flex w-full flex-col">
-        <div className="relative flex min-h-screen w-full flex-col">
+        <div
+          className="relative flex w-full flex-col"
+          style={{ minHeight: `calc(100vh - ${headerHeight}px)` }}
+        >
           <Hero />
         </div>
-        <section className="container flex flex-col items-center gap-y-8">
+        <section className="container flex flex-col items-center gap-y-8 pt-10">
           <h3 className="text-3xl">
             Ready for a culinary adventure? Let's get cooking!
           </h3>
