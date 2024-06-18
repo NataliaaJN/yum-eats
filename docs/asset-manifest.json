@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.406fd6ff.css",
-    "main.js": "/static/js/main.fa773e1e.js",
-    "static/js/453.7f5c22a6.chunk.js": "/static/js/453.7f5c22a6.chunk.js",
-    "static/media/food-dish.png": "/static/media/food-dish.cdd00febae6e9dff57cc.png",
-    "index.html": "/index.html",
-    "main.406fd6ff.css.map": "/static/css/main.406fd6ff.css.map",
-    "main.fa773e1e.js.map": "/static/js/main.fa773e1e.js.map",
-    "453.7f5c22a6.chunk.js.map": "/static/js/453.7f5c22a6.chunk.js.map"
+    "main.css": "/yum-eats/static/css/main.406fd6ff.css",
+    "main.js": "/yum-eats/static/js/main.0792758b.js",
+    "static/js/453.7f5c22a6.chunk.js": "/yum-eats/static/js/453.7f5c22a6.chunk.js",
+    "static/media/food-dish.png": "/yum-eats/static/media/food-dish.cdd00febae6e9dff57cc.png",
+    "index.html": "/yum-eats/index.html",
+    "main.406fd6ff.css.map": "/yum-eats/static/css/main.406fd6ff.css.map",
+    "main.0792758b.js.map": "/yum-eats/static/js/main.0792758b.js.map",
+    "453.7f5c22a6.chunk.js.map": "/yum-eats/static/js/453.7f5c22a6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.406fd6ff.css",
-    "static/js/main.fa773e1e.js"
+    "static/js/main.0792758b.js"
   ]
 }
