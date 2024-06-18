@@ -61,5 +61,12 @@ Open your browser and navigate to http://localhost:3000
 To run this project, you will need to add the following environment variables to your .env file
 
 `REACT_APP_API_KEY` - Your Spoonacular API key
- 
+
+ # TODOS
+- Custom loader
+- Error page
+- Filter by category
+- Page for each recipe
+- Add more info to recipe cards
+- Improve styles
 
