@@ -1,5 +1,5 @@
 {
-  "name": "react-template",
+  "name": "yum-eats",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,7 +27,8 @@
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "pc": "npm run lint:fix && npm run format"
+    "pc": "npm run lint:fix && npm run format",
+    "githubpages": "rm -rf build && rm -rf docs && npm run build && mv build docs && git add docs/* && git commit -m \"Publish in GitHub Pages\" && git push"
   },
   "eslintConfig": {
     "extends": [
