@@ -50,7 +50,6 @@ const SearchInput = ({
         onChange={onChange}
         placeholder={placeholder}
       />
-      {/* {handleSearchOnClick && onClickSearch && ( */}
       {handleSearchOnClick && onClickSearch && (
         <button
           onClick={handleButtonClick}

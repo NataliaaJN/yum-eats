@@ -58,20 +58,3 @@ export const getRecipesByIngredients = async (
     throw error;
   }
 };
-
-// export const getRecipesByCategory = async (
-//   category: string,
-// ): Promise<Recipe[]> => {
-//   try {
-//     const response = await api.get('/complexSearch', {
-//       params: {
-//         apiKey,
-//         type: category,
-//       },
-//     });
-//     return response.data.results;
-//   } catch (error) {
-//     console.error('Error fetching recipes by category:', error);
-//     throw error;
-//   }
-// };
