@@ -1,10 +1,11 @@
 import Button from '../Button';
 import FoodDish from '../../assets/images/food-dish.png';
 
-const Hero = () => {
-  const action = () => {
-    console.log('working');
-  };
+interface HeroProps {
+  scrollToSection: () => void;
+}
+
+const Hero = ({ scrollToSection }: HeroProps) => {
   return (
     <article className="container flex flex-1 flex-col-reverse justify-end gap-y-5 py-5 md:justify-center lg:flex-row">
       <section className="flex flex-col items-start gap-y-5 lg:max-w-[50%] lg:justify-center">
@@ -15,7 +16,7 @@ const Hero = () => {
           Dive into a delightful world of flavors and fun! Discover new recipes,
           experiment with ingredients, and create mouth-watering dishes.
         </p>
-        <Button className="w-full md:w-fit" onClick={action}>
+        <Button className="w-full md:w-fit" onClick={scrollToSection}>
           Explore Recipes
         </Button>
       </section>

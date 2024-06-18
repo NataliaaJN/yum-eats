@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { Recipe } from '../types/recipe';
 
-const apiKey = '993e11bdc65f4625b6a170826eb661b2';
-// const apiKey = process.env.REACT_APP_API_KEY;
+const apiKey = process.env.REACT_APP_API_KEY;
 const baseURL = 'https://api.spoonacular.com/recipes';
 
 // Axios instance with base configuration
