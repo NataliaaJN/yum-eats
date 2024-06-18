@@ -1,5 +1,6 @@
 {
   "name": "yum-eats",
+  "homepage": "https://nataliaajn.github.io/yum-eats",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
